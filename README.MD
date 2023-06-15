@@ -9,7 +9,13 @@
 ```
 npm init
 ```
-- instalar Express
+- instalar Express (en directoio raiz)
 ```
 npm install express
 ```
+- Instalar nodemon para uso en dev
+```
+npm install --save-dev nodemon
+```
+- agregar los scripts start y start:dev a package.json
+- agregar .gitignore para exluir la carpeta _node_modules_
