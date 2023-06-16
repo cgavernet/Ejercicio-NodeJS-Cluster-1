@@ -11,7 +11,7 @@ app.use(express.json());
 //app.use('/library', libraryRouter);
 app.use('/user', userRouter);
 app.use('/library', libraryRouter);
-
+app.use('/book', bookRouter);
 
 // Manejo errores
 const errorHandler = (err, req, res, next) =>{
