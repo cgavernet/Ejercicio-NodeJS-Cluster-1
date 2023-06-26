@@ -23,17 +23,28 @@ const User = sequelize.define("Users", {
             isEmail: true,
         },
     },
+    username: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+    },
     password: {
         type: DataTypes.STRING,
         allowNull: false,
     },
+},{
+    paranoid: true, //softdelet
 });
 
-// User.bulkCreate([
-//     { firstName: "admin", lastName: "admin", email:"admin@adminit.com", password: "admin" },
-//     { firstName: "Jack", lastName: "Stark", email: "jackstartk@itworld.com", password: "1234" },
-// ]).then(() => console.log("Users data have been saved"));
-//await User.sync();
-//console.log(sequelize.models.User); // true
+sequelize.sync({force: true}).then(()=>{
+    User.create(
+        {
+            "firstName": "Jhon",
+            "lastName": "Doe",
+            "email": "admin@admin.com",
+            "username": "admin",
+            "password": "admin"
+        }
+    ).then(() => console.log("Users data have been saved"));
+})
 
 module.exports = User;

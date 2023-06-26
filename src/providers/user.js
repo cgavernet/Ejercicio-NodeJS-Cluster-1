@@ -4,7 +4,8 @@ const { User } = require("../models");
 
 const getUser = async (userId) => {
     try {
-        const user = await User.findByPk(userId, { include: { all: true } });
+        const user = await User.findByPk(userId);
+        // user = await User.findByPk(userId, { include: { all: true } });
         return user;
     } catch (err) {
         console.error("Error when fetching User", err);
@@ -39,6 +40,8 @@ const updateUser = async(userId, user) =>{
                 id: userId,
             }
         });
+        const userUpdated = await User.findByPk(userId, { include: { all: true } });
+        return userUpdated;
     } catch (error) {
         console.error("Error when updating User", error);
         throw error;
@@ -47,14 +50,15 @@ const updateUser = async(userId, user) =>{
 
 const deleteUser = async(userId) => {
     try {
-        await User.destroy({
+        const userDeleted = await User.destroy({
             where: {
                 id: userId,
             }
         });
+        return userDeleted;
     } catch (error) {
         console.error("Error when deleting User", error);
         throw error;
     }
 }
-module.exports = { getUser, createUser, getAllUsers, updateUser };
+module.exports = { getUser, createUser, getAllUsers, updateUser, deleteUser };

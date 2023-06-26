@@ -1,5 +1,6 @@
 const express = require('express');
 const { bookRouter, userRouter, authRouter, libraryRouter } = require("./routes");
+const { initializeDB } = require("./config/db-config");
 const PORT = 8090;
 
 const app = express();
@@ -22,6 +23,7 @@ const errorHandler = (err, req, res, next) =>{
 app.use(errorHandler);
 
 //levanto el servidor
-app.listen(PORT, ()=>{
+app.listen(PORT, async ()=>{
+    await initializeDB();
     console.log(`Server running in ${PORT}`);
-})
+});
