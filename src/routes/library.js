@@ -4,9 +4,9 @@ const { libraryController } = require('../controllers');
 
 //router.get();
 router.post("/", libraryController.createLibrary);
-router.get("/", libraryController.getAllLibrary);
+router.get("/", libraryController.getAllLibrarys);
 router.get("/:libraryId", libraryController.getLibrary);
 router.put("/:libraryId", libraryController.updateLibrary);
-router.delete("/:libraryId", libraryController.delLibrary);
+router.delete("/:libraryId", libraryController.deleteLibrary);
 
 module.exports = router;
