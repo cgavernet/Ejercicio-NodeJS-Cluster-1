@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const { secret } = require('../middleware/auth');
 const { userProvider } = require('../providers');
-const { json } = require('sequelize');
+//const { json } = require('sequelize');
 //const { authSevice } = require('../services');
 
 router.post("/", async (req, res)=>{
