@@ -20,5 +20,7 @@ passport.use(
         }   
     )
 );
+// Creo el middleware de autenticación sin session
+const authMiddleware = passport.authenticate('jwt', {session: false})
 
-module.exports = { secret };
+module.exports = { secret, authMiddleware };
