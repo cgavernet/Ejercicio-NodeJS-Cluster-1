@@ -35,16 +35,4 @@ const User = sequelize.define("Users", {
     paranoid: true, //softdelete
 });
 
-sequelize.sync({force: true}).then(()=>{
-    User.create(
-        {
-            "firstName": "Jhon",
-            "lastName": "Doe",
-            "email": "admin@admin.com",
-            "username": "admin",
-            "password": "admin"
-        }
-    ).then(() => console.log("Users data have been saved"));
-});
-
 module.exports = User;
