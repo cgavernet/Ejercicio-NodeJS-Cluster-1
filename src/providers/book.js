@@ -4,7 +4,7 @@ const { Book } = require("../models");
 
 const getBook = async (bookId) => {
     try {
-        const book = await Book.findByPk(bookId);
+        const book = await Book.findByPk(bookId, {include: { all: true } });
         // book = await Book.findByPk(bookId, { include: { all: true } });
         return book;
     } catch (err) {
