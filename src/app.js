@@ -1,18 +1,17 @@
 const express = require('express');
 const { bookRouter, userRouter, authRouter, libraryRouter } = require("./routes");
 const { initializeDB  } = require("./config/db-config");
-const { authMiddleware }= require("./middleware/auth");
 const { addDefaultUser } = require("./providers/user");
-
+//const { authMiddleware } = require("./middleware/auth");
 const PORT = 8090;
-
 const app = express();
 
 //app Middlewares;
 app.use(express.json());
 
 //Rutas
-app.use('/user', authMiddleware, userRouter);
+//app.use('/user', authMiddleware, userRouter);
+app.use('/user', userRouter);
 app.use('/library', libraryRouter);
 app.use('/book', bookRouter);
 app.use('/login', authRouter);
