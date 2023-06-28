@@ -61,4 +61,38 @@ const deleteUser = async(userId) => {
         throw error;
     }
 }
-module.exports = { getUser, createUser, getAllUsers, updateUser, deleteUser };
+
+const validateUser = async (user, password) => {
+    try {
+        const user = await User.findAll({
+            where: {
+                username: user,
+                password: password 
+            }
+        });
+        // user = await User.findByPk(userId, { include: { all: true } });
+        return user;
+    } catch (err) {
+        console.error("Error when fetching User", err);
+        throw err;
+    }
+};
+
+const addDefaultUser = async () => {
+    try {
+        const newUser = await User.create({
+            firstName: "Jhon",
+            lastName: "Doe",
+            email: "admin@admin.com",
+            username: "admin",
+            password: "admin"
+        });
+        console.log("Nuevo usuario");
+        return newUser;
+    } catch (err) {
+        console.error("Error when creating Default User", err);
+        throw err;
+    }
+};
+
+module.exports = { getUser, createUser, getAllUsers, updateUser, deleteUser, validateUser, addDefaultUser };
