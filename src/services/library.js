@@ -21,4 +21,13 @@ const deleteLibrary = async (libraryId) => {
     return await libraryProvider.deleteLibrary(libraryId);
 }
 
-module.exports = { getLibrary, createLibrary, getAllLibrarys, updateLibrary, deleteLibrary };
+const createBook = async (libraryId, book) => {
+    const library = await libraryProvider.getLibrary(libraryId);
+    if (library) {
+        const newBook = await libraryProvider.createBook(libraryId, book);
+        return newBook;
+    }
+        return null;
+};
+
+module.exports = { getLibrary, createLibrary, getAllLibrarys, updateLibrary, deleteLibrary, createBook };

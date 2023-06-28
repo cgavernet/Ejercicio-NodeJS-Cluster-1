@@ -1,6 +1,6 @@
 //const { Op } = require("sequelize");
 //const { where } = require("sequelize");
-const { Library } = require("../models");
+const { Library, Book } = require("../models");
 
 const getLibrary = async (libraryId) => {
     try {
@@ -59,5 +59,16 @@ const deleteLibrary = async(libraryId) => {
         console.error("Error when deleting Library", error);
         throw error;
     }
-}
-module.exports = { getLibrary, createLibrary, getAllLibrarys, updateLibrary, deleteLibrary };
+};
+
+const createBook = async (libraryId, book) => {
+    try {
+        const newBook = await Book.create({ ...book, library: libraryId });
+        return newBook;
+    } catch (err) {
+        console.error("Error when creating Bookt", err);
+        throw err;
+    }
+};
+
+module.exports = { getLibrary, createLibrary, getAllLibrarys, updateLibrary, deleteLibrary, createBook};
