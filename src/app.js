@@ -28,7 +28,7 @@ app.use(errorHandler);
 
 //levanto el servidor
 app.listen(PORT, async ()=>{
-    await initializeDB();
-    await addDefaultUser();
+    await initializeDB();   //Inicio la conexión a la Bd
+    await addDefaultUser(); //Creo el usuario por defecto
     console.log(`Server running in ${PORT}`);
 });
