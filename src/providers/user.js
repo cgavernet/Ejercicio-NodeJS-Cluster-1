@@ -1,11 +1,11 @@
 //const { Op } = require("sequelize");
 const { where } = require("sequelize");
 const { User } = require("../models");
+const { use } = require("passport");
 
 const getUser = async (userId) => {
     try {
         const user = await User.findByPk(userId);
-        // user = await User.findByPk(userId, { include: { all: true } });
         return user;
     } catch (err) {
         console.error("Error when fetching User", err);
@@ -62,17 +62,17 @@ const deleteUser = async(userId) => {
     }
 }
 
-const validateUser = async (user, password) => {
+const validateUser = async (username, password) => {
     try {
-        const user = await User.findAll({
-            where: {
-                username: user,
-                password: password 
-            }
+        const user = await User.findOne({
+            where: { username, password }
         });
-        // user = await User.findByPk(userId, { include: { all: true } });
-        return user;
-    } catch (err) {
+        if (user){
+            return user;
+        }else{
+            return false;
+        }
+    } catch (error) {
         console.error("Error when fetching User", err);
         throw err;
     }
