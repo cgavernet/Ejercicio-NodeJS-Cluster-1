@@ -1,7 +1,6 @@
 //const { Op } = require("sequelize");
-const { where } = require("sequelize");
+//const { where } = require("sequelize");
 const { User } = require("../models");
-const { use } = require("passport");
 
 const getUser = async (userId) => {
     try {
