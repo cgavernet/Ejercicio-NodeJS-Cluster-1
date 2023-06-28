@@ -5,8 +5,8 @@ const { authMiddleware } = require("../middleware/auth");
 
 //router.get();
 router.post("/", authMiddleware, userContoller.createUser);
-router.get("/", userContoller.getAllUsers );
-router.get("/:userId", userContoller.getUser);
+router.get("/", authMiddleware, userContoller.getAllUsers );
+router.get("/:userId", authMiddleware, userContoller.getUser);
 router.put("/:userId", authMiddleware, userContoller.updateUser);
 router.delete("/:userId", authMiddleware, userContoller.deleteUser);
 
