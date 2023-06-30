@@ -1,6 +1,7 @@
 //const { Op } = require("sequelize");
 //const { where } = require("sequelize");
 const { Library, Book } = require("../models");
+const { libraryService } = require("../services");
 
 const getLibrary = async (libraryId) => {
     try {
@@ -48,13 +49,16 @@ const getAllLibrarys = async() =>{
 
 const updateLibrary = async(libraryId, library) =>{
     try {
-        await Library.update((library),{
-            where: {
-                id: libraryId,
-            }
-        });
-        const libraryUpdated = await Library.findByPk(libraryId, { include: { all: true } });
-        return libraryUpdated;
+        const libraryToUpdate = await Library.findByPk(libraryId);
+        if (libraryToUpdate){
+            await Library.update((library),{
+                where: {
+                    id: libraryId,
+                }
+            });
+            return true;
+        }
+        return false;
     } catch (error) {
         console.error("Error when updating Library", error);
         throw error;

@@ -37,7 +37,7 @@ const updateBook = async (req, res) => {
         if (!bookUpdated) {
             res.status(404).json({ action: "updateBook", error: "Book Not Found" });
         } else {
-            res.json(bookUpdated);
+            res.json({ message: "Book Updated" });
         }
     } catch (error) {
         res.status(500).json({ action: "updateBook", error: err.message });

@@ -49,19 +49,17 @@ const getAllBooks = async() =>{
 
 const updateBook = async(bookId, book) =>{
     try {
-        await Book.update((book),{
-            where: {
-                id: bookId,
-            }
-        });
-        const bookUpdated = await Book.findByPk(bookId, 
-            { 
-                include: { 
-                    all: true,
-                    attributes: ['id', 'name', 'location', 'telefono']
-                } 
+
+        const bookToUpdated = await Book.findByPk(bookId);
+        if(bookToUpdated){
+            await Book.update((book),{
+                where: {
+                    id: bookId,
+                }
             });
-        return bookUpdated;
+            return true;
+        }
+        return false;
     } catch (error) {
         console.error("Error when updating Book", error);
         throw error;

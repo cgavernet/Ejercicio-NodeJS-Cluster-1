@@ -37,7 +37,7 @@ const updateLibrary = async (req, res) => {
         if (!libraryUpdated) {
             res.status(404).json({ action: "updateLibrary", error: "Library Not Found" });
         } else {
-            res.json(libraryUpdated);
+            res.json({ message: "Library Updated" });
         }
     } catch (error) {
         res.status(500).json({ action: "updateLibrary", error: err.message });
