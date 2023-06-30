@@ -79,15 +79,20 @@ const validateUser = async (username, password) => {
 
 const addDefaultUser = async () => {
     try {
-        const newUser = await User.create({
-            firstName: "Jhon",
-            lastName: "Doe",
-            email: "admin@admin.com",
-            username: "admin",
-            password: "admin"
+        const user = await User.findOne({
+            where: { username: "admin", }
         });
-        console.log("Nuevo usuario");
-        return newUser;
+        if (user){
+            const newUser = await User.create({
+                firstName: "Jhon",
+                lastName: "Doe",
+                email: "admin@admin.com",
+                username: "admin",
+                password: "admin"
+            });
+            console.log("Nuevo usuario");
+            return newUser;
+        }
     } catch (err) {
         console.error("Error when creating Default User", err);
         throw err;
