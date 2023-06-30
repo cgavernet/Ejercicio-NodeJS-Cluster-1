@@ -11,7 +11,6 @@ const Book = sequelize.define("Books", {
     },
     isbn:{
         type: DataTypes.INTEGER,
-        unique: true,
         allowNull: false,
     },
     titulo:{
