@@ -1,6 +1,6 @@
 //const { Op } = require("sequelize");
 //const { where } = require("sequelize");
-const { Book } = require("../models");
+const { Book, Library } = require("../models");
 
 const getBook = async (bookId) => {
     try {
@@ -22,8 +22,14 @@ const getBook = async (bookId) => {
 
 const createBook = async (book) => {
     try {
-        const newBook = await Book.create(book);
-        return newBook;
+        //Busco si la librería existe para luego crear el book
+        const library = await Library.findByPk(book.library);
+        if(library){
+            const newBook = await Book.create(book);
+            return newBook;
+        }else{
+            return { message: "Library not exists"}
+        }
     } catch (err) {
         console.error("Error when creating Book", err);
         throw err;
