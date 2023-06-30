@@ -82,7 +82,8 @@ const addDefaultUser = async () => {
         const user = await User.findOne({
             where: { username: "admin", }
         });
-        if (user){
+        //Verifica si el usuario ya existe
+        if (!user){
             const newUser = await User.create({
                 firstName: "Jhon",
                 lastName: "Doe",
