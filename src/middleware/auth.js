@@ -11,12 +11,8 @@ passport.use(
         secretOrKey: secret,
     },
     (jwtPayload, done) => {
-            if(jwtPayload.user === 'admin'){
-                const usuario = jwtPayload;
-                return done(null, usuario);
-            }else{
-                return done(null, false, {message: 'User not valid'});
-            };
+            const usuario = jwtPayload;
+            return done(null, usuario);
         }   
     )
 );
