@@ -4,7 +4,14 @@ const { Book } = require("../models");
 
 const getBook = async (bookId) => {
     try {
-        const book = await Book.findByPk(bookId, {include: { all: true } });
+        const book = await Book.findByPk(bookId, 
+            {
+                include: { 
+                    all: true,
+                    attributes: ['id', 'name', 'location', 'telefono'],
+                },
+                attributes: ['id', 'isbn', 'titulo','autor', 'year'],
+            });
         // book = await Book.findByPk(bookId, { include: { all: true } });
         return book;
     } catch (err) {
@@ -25,7 +32,14 @@ const createBook = async (book) => {
 
 const getAllBooks = async() =>{
     try {
-        const books = await Book.findAll();
+        const books = await Book.findAll(
+            { 
+                include: { 
+                    all: true,
+                    attributes: ['id', 'name', 'location', 'telefono'],
+                },
+                attributes: ['id', 'isbn', 'titulo','autor', 'year']
+            });
         return books;
     } catch (error) {
         console.error("Error when geting all Books", error);
@@ -40,7 +54,13 @@ const updateBook = async(bookId, book) =>{
                 id: bookId,
             }
         });
-        const bookUpdated = await Book.findByPk(bookId, { include: { all: true } });
+        const bookUpdated = await Book.findByPk(bookId, 
+            { 
+                include: { 
+                    all: true,
+                    attributes: ['id', 'name', 'location', 'telefono']
+                } 
+            });
         return bookUpdated;
     } catch (error) {
         console.error("Error when updating Book", error);
