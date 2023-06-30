@@ -26,13 +26,14 @@ const Library = sequelize.define("Librarys", {
 });
 
 Library.hasMany(Book, {
-        foreignKey: 'library',
-    });
+    foreignKey: 'library',
+    hooks:true
+});
 Book.belongsTo(Library,{
-        foreignKey: 'library',
+    foreignKey: 'library',
+    onDelete: 'SET NULL',
     //constraints: false,    //Si es true, para crear el libro debe existir la libreria
-    });
+});
 
-//Library.sync({force: true});
 
 module.exports = Library;
