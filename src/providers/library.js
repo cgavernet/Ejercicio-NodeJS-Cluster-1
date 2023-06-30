@@ -4,7 +4,14 @@ const { Library, Book } = require("../models");
 
 const getLibrary = async (libraryId) => {
     try {
-        const library = await Library.findByPk(libraryId, { include: { all: true } });
+        const library = await Library.findByPk(libraryId, 
+            { 
+                include: { 
+                    all: true,
+                    attributes: ['id', 'isbn', 'titulo','autor', 'year']
+                }, 
+                attributes: ['id', 'name', 'location', 'telefono']
+            });
         return library;
     } catch (err) {
         console.error("Error when fetching Library", err);
@@ -24,7 +31,14 @@ const createLibrary = async (library) => {
 
 const getAllLibrarys = async() =>{
     try {
-        const librarys = await Library.findAll({ include: { all: true } });
+        const librarys = await Library.findAll(
+            { 
+                include: { 
+                    all: true,
+                    attributes: ['id', 'isbn', 'titulo','autor', 'year']
+                }, 
+                attributes: ['id', 'name', 'location', 'telefono']
+            });
         return librarys;
     } catch (error) {
         console.error("Error when geting all Librarys", error);
